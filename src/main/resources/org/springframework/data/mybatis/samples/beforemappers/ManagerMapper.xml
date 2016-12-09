@@ -1,0 +1,12 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.springframework.data.mybatis.samples.domains.Manager">
+
+    <resultMap id="ResultMap" type="org.springframework.data.mybatis.samples.domains.Manager">
+        <id property="id" column="id"/>
+        <result property="login" column="login"/>
+        <result property="roleList" column="roleList"
+                typeHandler="org.springframework.data.mybatis.samples.handlers.RoleListTypeHandler"/>
+    </resultMap>
+
+
+</mapper>

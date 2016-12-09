@@ -22,12 +22,11 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-import org.springframework.data.mybatis.annotations.Entity;
-import org.springframework.data.mybatis.domains.LongId;
-import org.springframework.data.mybatis.repository.support.MybatisRepository;
-import org.springframework.data.rest.core.annotation.RepositoryRestResource;
+import org.springframework.data.mybatis.samples.domains.Manager;
+import org.springframework.data.mybatis.samples.enums.Role;
+import org.springframework.data.mybatis.samples.repositories.ManagerRepository;
 
-import java.util.stream.Stream;
+import java.util.Arrays;
 
 @SpringBootApplication
 public class SpringDataMybatisSamplesApplication {
@@ -37,40 +36,16 @@ public class SpringDataMybatisSamplesApplication {
     }
 
     @Bean
-    public CommandLineRunner dummyCLR(ReservationRepository reservationRepository) {
+    public CommandLineRunner dummyCLR(ManagerRepository managerRepository) {
         return args -> {
-            Stream.of("Tom", "Jack", "Apple")
-                    .forEach(name -> reservationRepository.save(new Reservation(name)));
+            Manager apple = new Manager();
+            apple.setLogin("apple");
+            apple.setRoleList(Arrays.asList(Role.ROLE_ADMIN, Role.ROLE_CLIENT));
+            managerRepository.save(apple);
+
+            Manager tom = managerRepository.findByLogin("apple");
+            System.out.println(tom);
         };
     }
 
-}
-
-
-@RepositoryRestResource
-interface ReservationRepository extends MybatisRepository<Reservation, Long> {
-}
-
-@Entity
-class Reservation extends LongId {
-
-    private String reservationName;
-
-    public Reservation() {
-    }
-
-    public Reservation(String reservationName) {
-        this.reservationName = reservationName;
-    }
-
-    public String getReservationName() {
-        return reservationName;
-    }
-
-    @Override
-    public String toString() {
-        return "Reservation{" +
-                "reservationName='" + reservationName + '\'' +
-                '}';
-    }
 }
