@@ -27,8 +27,7 @@ import java.util.List;
 @RepositoryRestResource(collectionResourceRel = "siteFunctions", excerptProjection = SiteFunctionRepository.class)
 public interface SiteFunctionRepository extends MybatisRepository<SiteFunction, Long> {
 
-    // Not support now
-//	List<SiteFunction> findBySiteService(SiteService siteService);
+//    List<SiteFunction> findBySiteService(@Param("siteService") SiteService siteService);
 
     List<SiteFunction> findBySiteServiceId(@Param("id") Long id);
 
