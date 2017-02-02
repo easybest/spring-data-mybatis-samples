@@ -1,0 +1,6 @@
+CREATE TABLE "SITE_SERVICE" (
+  "ID" SERIAL NOT NULL,
+  "NAME" varchar(50) DEFAULT NULL,
+  PRIMARY KEY ("ID"),
+  CONSTRAINT sites_service_unique UNIQUE ("NAME")
+);
