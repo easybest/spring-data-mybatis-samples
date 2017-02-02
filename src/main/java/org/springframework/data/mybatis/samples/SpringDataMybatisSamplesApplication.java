@@ -26,7 +26,9 @@ import org.springframework.data.mybatis.annotations.Entity;
 import org.springframework.data.mybatis.domains.LongId;
 import org.springframework.data.mybatis.repository.support.MybatisRepository;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
+import org.springframework.data.rest.core.config.Projection;
 
+import java.util.Random;
 import java.util.stream.Stream;
 
 @SpringBootApplication
@@ -40,27 +42,52 @@ public class SpringDataMybatisSamplesApplication {
     public CommandLineRunner dummyCLR(ReservationRepository reservationRepository) {
         return args -> {
             Stream.of("Tom", "Jack", "Apple")
-                    .forEach(name -> reservationRepository.save(new Reservation(name)));
+                    .forEach(name -> reservationRepository.save(new Reservation(name, new Random().nextInt(9))));
         };
     }
 
 }
 
 
-@RepositoryRestResource
+@RepositoryRestResource(excerptProjection = ReservationProjection.class)
 interface ReservationRepository extends MybatisRepository<Reservation, Long> {
+}
+
+@Projection(name = "reservationProjection", types = {Reservation.class})
+interface ReservationProjection {
+
+    String getReservationName();
+
 }
 
 @Entity
 class Reservation extends LongId {
 
-    private String reservationName;
+    private String  reservationName;
+    private Integer num;
 
     public Reservation() {
     }
 
     public Reservation(String reservationName) {
         this.reservationName = reservationName;
+    }
+
+    public Reservation(String reservationName, Integer num) {
+        this(reservationName);
+        this.num = num;
+    }
+
+    public void setReservationName(String reservationName) {
+        this.reservationName = reservationName;
+    }
+
+    public Integer getNum() {
+        return num;
+    }
+
+    public void setNum(Integer num) {
+        this.num = num;
     }
 
     public String getReservationName() {
