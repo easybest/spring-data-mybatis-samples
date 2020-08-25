@@ -1,21 +1,44 @@
-# spring-data-mybatis-samples
-Sample starter applications and code for use with the Spring Data MyBatis project
+/*
+ * Copyright 2012-2019 the original author or authors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+package org.springframework.data.mybatis.samples.repository;
 
-[Spring Data Mybatis](https://github.com/easybest/spring-data-mybatis)
+import java.util.Collection;
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Stream;
 
-# How to run
-`mvn spring-boot:run`
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Slice;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.mybatis.repository.Modifying;
+import org.springframework.data.mybatis.repository.MybatisRepository;
+import org.springframework.data.mybatis.repository.Query;
+import org.springframework.data.mybatis.samples.domain.Customer;
+import org.springframework.data.mybatis.samples.domain.Customer.Constellation;
+import org.springframework.data.mybatis.samples.domain.Customer.Gender;
+import org.springframework.data.mybatis.samples.domain.Name;
+import org.springframework.data.repository.query.Param;
+import org.springframework.transaction.annotation.Transactional;
 
-
-# Visit
-* http://localhost:8080/shop
-* http://localhost:8080/shop/1
-* http://localhost:8080/customer
-* http://localhost:8080/
-
-
-# Repository Example
-```java
+/**
+ * .
+ *
+ * @author JARVIS SONG
+ */
 public interface CustomerRepository extends MybatisRepository<Customer, Name> {
 
 	List<Customer> findByNameFirstnameLike(String firstname);
@@ -172,5 +195,5 @@ public interface CustomerRepository extends MybatisRepository<Customer, Name> {
 	Stream<Customer> streamAllPaged(Pageable pageable);
 
 	List<Customer> findByNameLastnameNotContaining(String part);
+
 }
-```

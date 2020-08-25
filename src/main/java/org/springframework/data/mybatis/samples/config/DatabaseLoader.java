@@ -17,12 +17,18 @@
  */
 package org.springframework.data.mybatis.samples.config;
 
+import java.util.Arrays;
+import java.util.Calendar;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.mybatis.samples.domain.Address;
+import org.springframework.data.mybatis.samples.domain.Shop;
+import org.springframework.data.mybatis.samples.repository.ShopRepository;
 import org.springframework.data.mybatis.samples.security.SiteContent;
 import org.springframework.data.mybatis.samples.security.SiteContentRepository;
 import org.springframework.data.mybatis.samples.security.SiteFunction;
@@ -42,6 +48,9 @@ public class DatabaseLoader implements CommandLineRunner {
 	private final SiteContentRepository siteContentRepository;
 
 	@Autowired
+	private ShopRepository shopRepository;
+
+	@Autowired
 	public DatabaseLoader(SiteServiceRepository siteServiceRepository, SiteFunctionRepository siteFunctionRepository,
 			SiteContentRepository siteContentRepository) {
 		this.siteServiceRepository = siteServiceRepository;
@@ -52,9 +61,6 @@ public class DatabaseLoader implements CommandLineRunner {
 	@Override
 	public void run(String... strings) throws Exception {
 		try {
-
-			// siteServiceRepository.save(new SiteService("User service"));
-			// siteServiceRepository.save(new SiteService("Reservation service"));
 
 			SiteService userManagementService = new SiteService();
 			userManagementService.setName("User management");
@@ -71,6 +77,36 @@ public class DatabaseLoader implements CommandLineRunner {
 			this.siteServiceRepository.save(userManagementService);
 			this.siteFunctionRepository.save(userManagerFunction);
 			this.siteContentRepository.save(viewManagerContent);
+
+			this.shopRepository
+					.saveAll(
+							Arrays.asList(
+									new Shop("Walmart", "shop@walmart.com").setActive(true).setDuration(9)
+											.setIntroduce("I am the 300th shop of Walmart.")
+											.setAddress(new Address("USA", "NY", "Queen", "351"))
+											.setBrandEstablishmentTime(new Calendar.Builder().setDate(1962, 1, 1)
+													.build().getTime().getTime())
+											.setOpeningTime(
+													new Calendar.Builder().setDate(2010, 10, 1).build().getTime()),
+									new Shop("Costco", "costco@gmail.com").setActive(false).setDuration(9)
+											.setIntroduce("I am the 20th shop of Costco.")
+											.setAddress(new Address("USA", "WA", "Issaquah", "908"))
+											.setBrandEstablishmentTime(new Calendar.Builder()
+													.setDate(1976, 1, 1).build().getTime().getTime())
+											.setOpeningTime(
+													new Calendar.Builder().setDate(2009, 5, 15).build().getTime()),
+									new Shop("Carrefour", "carrefour@gmail.com").setActive(true).setDuration(12)
+											.setAddress(new Address("FR", "Boulogne", "Golden", "18"))
+											.setBrandEstablishmentTime(new Calendar.Builder()
+													.setDate(1959, 1, 1).build().getTime().getTime())
+											.setOpeningTime(
+													new Calendar.Builder().setDate(2011, 6, 25).build().getTime()),
+									new Shop("Auchan", "shop@auchan.com").setActive(true).setDuration(11)
+											.setAddress(new Address("FR", "London", "Oushang", "93"))
+											.setBrandEstablishmentTime(new Calendar.Builder().setDate(1961, 1, 1)
+													.build().getTime().getTime())
+											.setOpeningTime(
+													new Calendar.Builder().setDate(2010, 3, 15).build().getTime())));
 
 		}
 		catch (Exception e) {
