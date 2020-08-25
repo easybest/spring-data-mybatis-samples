@@ -18,14 +18,10 @@
 
 package org.springframework.data.mybatis.samples.security;
 
-import org.springframework.data.mybatis.annotations.Column;
-import org.springframework.data.mybatis.annotations.JdbcType;
-import org.springframework.data.mybatis.annotations.MappedSuperclass;
-import org.springframework.data.mybatis.domains.LongId;
+import javax.persistence.Column;
+import javax.persistence.MappedSuperclass;
 
-import javax.validation.constraints.NotNull;
-
-import static org.apache.ibatis.type.JdbcType.VARCHAR;
+import org.springframework.data.mybatis.domain.LongId;
 
 /**
  * Created by dka on 1/13/17.
@@ -33,9 +29,7 @@ import static org.apache.ibatis.type.JdbcType.VARCHAR;
 @MappedSuperclass
 public abstract class SiteAccess extends LongId {
 
-	@JdbcType(VARCHAR)
 	@Column(name = "NAME")
-	@NotNull
 	private String name;
 
 	protected SiteAccess() {

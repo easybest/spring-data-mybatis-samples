@@ -18,86 +18,87 @@
 
 package org.springframework.data.mybatis.samples;
 
+import java.util.Random;
+import java.util.stream.Stream;
+
+import javax.persistence.Entity;
+
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-import org.springframework.data.mybatis.annotations.Entity;
-import org.springframework.data.mybatis.domains.LongId;
-import org.springframework.data.mybatis.repository.support.MybatisRepository;
+import org.springframework.data.mybatis.domain.LongId;
+import org.springframework.data.mybatis.repository.MybatisRepository;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 import org.springframework.data.rest.core.config.Projection;
-
-import java.util.Random;
-import java.util.stream.Stream;
 
 @SpringBootApplication
 public class SpringDataMybatisSamplesApplication {
 
-    public static void main(String[] args) {
-        SpringApplication.run(SpringDataMybatisSamplesApplication.class, args);
-    }
+	public static void main(String[] args) {
+		SpringApplication.run(SpringDataMybatisSamplesApplication.class, args);
+	}
 
-    @Bean
-    public CommandLineRunner dummyCLR(ReservationRepository reservationRepository) {
-        return args -> {
-            Stream.of("Tom", "Jack", "Apple")
-                    .forEach(name -> reservationRepository.save(new Reservation(name, new Random().nextInt(9))));
-        };
-    }
+	@Bean
+	public CommandLineRunner dummyCLR(ReservationRepository reservationRepository) {
+		return args -> {
+			Stream.of("Tom", "Jack", "Apple")
+					.forEach(name -> reservationRepository.save(new Reservation(name, new Random().nextInt(9))));
+		};
+	}
 
 }
-
 
 @RepositoryRestResource(excerptProjection = ReservationProjection.class)
 interface ReservationRepository extends MybatisRepository<Reservation, Long> {
+
 }
 
-@Projection(name = "reservationProjection", types = {Reservation.class})
+@Projection(name = "reservationProjection", types = { Reservation.class })
 interface ReservationProjection {
 
-    String getReservationName();
+	String getReservationName();
 
 }
 
 @Entity
 class Reservation extends LongId {
 
-    private String  reservationName;
-    private Integer num;
+	private String reservationName;
 
-    public Reservation() {
-    }
+	private Integer num;
 
-    public Reservation(String reservationName) {
-        this.reservationName = reservationName;
-    }
+	public Reservation() {
+	}
 
-    public Reservation(String reservationName, Integer num) {
-        this(reservationName);
-        this.num = num;
-    }
+	public Reservation(String reservationName) {
+		this.reservationName = reservationName;
+	}
 
-    public void setReservationName(String reservationName) {
-        this.reservationName = reservationName;
-    }
+	public Reservation(String reservationName, Integer num) {
+		this(reservationName);
+		this.num = num;
+	}
 
-    public Integer getNum() {
-        return num;
-    }
+	public void setReservationName(String reservationName) {
+		this.reservationName = reservationName;
+	}
 
-    public void setNum(Integer num) {
-        this.num = num;
-    }
+	public Integer getNum() {
+		return num;
+	}
 
-    public String getReservationName() {
-        return reservationName;
-    }
+	public void setNum(Integer num) {
+		this.num = num;
+	}
 
-    @Override
-    public String toString() {
-        return "Reservation{" +
-                "reservationName='" + reservationName + '\'' +
-                '}';
-    }
+	public String getReservationName() {
+		return reservationName;
+	}
+
+	@Override
+	public String toString() {
+		return "Reservation{" + "reservationName='" + reservationName + '\'' + '}';
+	}
+
 }

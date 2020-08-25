@@ -18,7 +18,7 @@
 
 package org.springframework.data.mybatis.samples.security;
 
-import org.springframework.data.mybatis.repository.support.MybatisRepository;
+import org.springframework.data.mybatis.repository.MybatisRepository;
 import org.springframework.data.mybatis.samples.security.projection.SiteServiceDefaultProjection;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 

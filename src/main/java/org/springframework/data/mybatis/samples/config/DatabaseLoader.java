@@ -15,66 +15,68 @@
  *   limitations under the License.
  *
  */
-
 package org.springframework.data.mybatis.samples.config;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.data.mybatis.samples.security.*;
-//import org.springframework.data.mybatis.samples.security.SiteService;
-//import org.springframework.data.mybatis.samples.security.SiteServiceRepository;
+import org.springframework.data.mybatis.samples.security.SiteContent;
+import org.springframework.data.mybatis.samples.security.SiteContentRepository;
+import org.springframework.data.mybatis.samples.security.SiteFunction;
+import org.springframework.data.mybatis.samples.security.SiteFunctionRepository;
+import org.springframework.data.mybatis.samples.security.SiteService;
+import org.springframework.data.mybatis.samples.security.SiteServiceRepository;
 
 @Configuration
 public class DatabaseLoader implements CommandLineRunner {
 
-    private static final Logger logger = LoggerFactory.getLogger(DatabaseLoader.class);
+	private static final Logger logger = LoggerFactory.getLogger(DatabaseLoader.class);
 
-    private final SiteServiceRepository  siteServiceRepository;
-    private final SiteFunctionRepository siteFunctionRepository;
-    private final SiteContentRepository  siteContentRepository;
+	private final SiteServiceRepository siteServiceRepository;
 
-    @Autowired
-    public DatabaseLoader(
-            SiteServiceRepository siteServiceRepository,
-            SiteFunctionRepository siteFunctionRepository,
-            SiteContentRepository siteContentRepository
-    ) {
-        this.siteServiceRepository = siteServiceRepository;
-        this.siteFunctionRepository = siteFunctionRepository;
-        this.siteContentRepository = siteContentRepository;
-    }
+	private final SiteFunctionRepository siteFunctionRepository;
 
-    @Override
-    public void run(String... strings) throws Exception {
-        try {
+	private final SiteContentRepository siteContentRepository;
 
+	@Autowired
+	public DatabaseLoader(SiteServiceRepository siteServiceRepository, SiteFunctionRepository siteFunctionRepository,
+			SiteContentRepository siteContentRepository) {
+		this.siteServiceRepository = siteServiceRepository;
+		this.siteFunctionRepository = siteFunctionRepository;
+		this.siteContentRepository = siteContentRepository;
+	}
 
-//			siteServiceRepository.save(new SiteService("User service"));
-//			siteServiceRepository.save(new SiteService("Reservation service"));
+	@Override
+	public void run(String... strings) throws Exception {
+		try {
 
-            SiteService userManagementService = new SiteService();
-            userManagementService.setName("User management");
-            this.siteServiceRepository.save(userManagementService);
+			// siteServiceRepository.save(new SiteService("User service"));
+			// siteServiceRepository.save(new SiteService("Reservation service"));
 
-            SiteFunction userManagerFunction = new SiteFunction();
-            userManagerFunction.setName("User management");
-            userManagerFunction.setSiteService(userManagementService);
+			SiteService userManagementService = new SiteService();
+			userManagementService.setName("User management");
+			this.siteServiceRepository.save(userManagementService);
 
-            SiteContent viewManagerContent = new SiteContent();
-            viewManagerContent.setName("view");
-            viewManagerContent.setSiteFunction(userManagerFunction);
+			SiteFunction userManagerFunction = new SiteFunction();
+			userManagerFunction.setName("User management");
+			userManagerFunction.setSiteService(userManagementService);
 
-            this.siteServiceRepository.save(userManagementService);
-            this.siteFunctionRepository.save(userManagerFunction);
-            this.siteContentRepository.save(viewManagerContent);
+			SiteContent viewManagerContent = new SiteContent();
+			viewManagerContent.setName("view");
+			viewManagerContent.setSiteFunction(userManagerFunction);
 
-        } catch (Exception e) {
-            logger.error("Can't load database data because of " + e.getMessage());
-            throw e;
-        }
-    }
+			this.siteServiceRepository.save(userManagementService);
+			this.siteFunctionRepository.save(userManagerFunction);
+			this.siteContentRepository.save(viewManagerContent);
+
+		}
+		catch (Exception e) {
+			logger.error("Can't load database data because of " + e.getMessage());
+			throw e;
+		}
+	}
 
 }

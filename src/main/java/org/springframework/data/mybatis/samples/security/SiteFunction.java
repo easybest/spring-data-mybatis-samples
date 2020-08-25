@@ -18,38 +18,40 @@
 
 package org.springframework.data.mybatis.samples.security;
 
-import org.springframework.data.mybatis.annotations.*;
-
-import javax.validation.constraints.NotNull;
 import java.util.List;
 
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
-@Entity(table = "SITE_FUNCTION")
+@Table(name = "SITE_FUNCTION")
+@Entity
 public class SiteFunction extends SiteAccess {
 
-    @OneToOne
-    @JoinColumn(name = "SITE_SERVICE_ID")
-    @NotNull
-    private SiteService siteService;
+	@OneToOne
+	@JoinColumn(name = "SITE_SERVICE_ID")
+	private SiteService siteService;
 
-    @OneToMany
-    @JoinColumn(name = "SITE_FUNCTION_ID",referencedColumnName = "ID")
-    @NotNull
-    private List<SiteContent> siteContentList;
+	@OneToMany
+	@JoinColumn(name = "SITE_FUNCTION_ID", referencedColumnName = "ID")
+	private List<SiteContent> siteContentList;
 
-    public SiteService getSiteService() {
-        return siteService;
-    }
+	public SiteService getSiteService() {
+		return siteService;
+	}
 
-    public void setSiteService(SiteService siteService) {
-        this.siteService = siteService;
-    }
+	public void setSiteService(SiteService siteService) {
+		this.siteService = siteService;
+	}
 
-    public List<SiteContent> getSiteContentList() {
-        return siteContentList;
-    }
+	public List<SiteContent> getSiteContentList() {
+		return siteContentList;
+	}
 
-    public void setSiteContentList(List<SiteContent> siteContentList) {
-        this.siteContentList = siteContentList;
-    }
+	public void setSiteContentList(List<SiteContent> siteContentList) {
+		this.siteContentList = siteContentList;
+	}
+
 }
