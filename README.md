@@ -9,6 +9,7 @@ Sample starter applications and code for use with the Spring Data MyBatis projec
 
 # Visit
 * http://localhost:8080/shop
+* http://localhost:8080/shop?name=wal
 * http://localhost:8080/shop/1
 * http://localhost:8080/customer
 * http://localhost:8080/
