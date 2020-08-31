@@ -4,7 +4,7 @@
 		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>com.ifrabbit</groupId>
+	<groupId>io.easybest</groupId>
 	<artifactId>spring-data-mybatis-samples</artifactId>
 	<version>2.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
@@ -13,7 +13,18 @@
 	<description>Sample starter applications and code for use with the Spring Data MyBatis
 		project.
 	</description>
-
+	<url>https://github.com/easybest/spring-data-mybatis-samples</url>
+	<developers>
+		<developer>
+			<id>jarvis</id>
+			<name>Jarvis Song</name>
+			<email>iamjarvissong@gmail.com</email>
+		</developer>
+	</developers>
+	<organization>
+		<name>EasyBest</name>
+		<url>https://easybest.io</url>
+	</organization>
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
@@ -30,7 +41,7 @@
 		<dependency>
 			<groupId>io.easybest</groupId>
 			<artifactId>spring-data-mybatis-boot-starter</artifactId>
-			<version>2.1.0.BUILD-SNAPSHOT</version>
+			<version>2.0.1.BUILD-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>org.projectlombok</groupId>

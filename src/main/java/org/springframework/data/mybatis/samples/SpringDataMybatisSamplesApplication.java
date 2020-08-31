@@ -18,6 +18,7 @@
 
 package org.springframework.data.mybatis.samples;
 
+import java.util.Optional;
 import java.util.Random;
 import java.util.stream.Stream;
 
@@ -27,12 +28,15 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.data.domain.AuditorAware;
 import org.springframework.data.mybatis.domain.LongId;
 import org.springframework.data.mybatis.repository.MybatisRepository;
+import org.springframework.data.mybatis.repository.config.EnableMybatisAuditing;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 import org.springframework.data.rest.core.config.Projection;
 
 @SpringBootApplication
+@EnableMybatisAuditing
 public class SpringDataMybatisSamplesApplication {
 
 	public static void main(String[] args) {
@@ -45,6 +49,11 @@ public class SpringDataMybatisSamplesApplication {
 			Stream.of("Tom", "Jack", "Apple")
 					.forEach(name -> reservationRepository.save(new Reservation(name, new Random().nextInt(9))));
 		};
+	}
+
+	@Bean
+	public AuditorAware<Long> auditorAware() {
+		return () -> Optional.of(1L);
 	}
 
 }
