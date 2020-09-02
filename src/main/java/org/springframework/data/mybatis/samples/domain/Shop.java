@@ -24,7 +24,6 @@ import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
-import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
 import javax.persistence.Table;
@@ -35,7 +34,6 @@ import javax.persistence.Version;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-import lombok.experimental.Accessors;
 
 import org.springframework.data.mybatis.annotation.JdbcType;
 import org.springframework.data.mybatis.domain.Audit;
@@ -50,7 +48,6 @@ import org.springframework.data.mybatis.domain.Audit;
 @Table(name = "t_shop")
 @Data
 @EqualsAndHashCode(callSuper = true)
-@Accessors(chain = true)
 @NoArgsConstructor
 public class Shop extends Audit<Long, Long> {
 

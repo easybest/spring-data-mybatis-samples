@@ -78,35 +78,35 @@ public class DatabaseLoader implements CommandLineRunner {
 			this.siteFunctionRepository.save(userManagerFunction);
 			this.siteContentRepository.save(viewManagerContent);
 
-			this.shopRepository
-					.saveAll(
-							Arrays.asList(
-									new Shop("Walmart", "shop@walmart.com").setActive(true).setDuration(9)
-											.setIntroduce("I am the 300th shop of Walmart.")
-											.setAddress(new Address("USA", "NY", "Queen", "351"))
-											.setBrandEstablishmentTime(new Calendar.Builder().setDate(1962, 1, 1)
-													.build().getTime().getTime())
-											.setOpeningTime(
-													new Calendar.Builder().setDate(2010, 10, 1).build().getTime()),
-									new Shop("Costco", "costco@gmail.com").setActive(false).setDuration(9)
-											.setIntroduce("I am the 20th shop of Costco.")
-											.setAddress(new Address("USA", "WA", "Issaquah", "908"))
-											.setBrandEstablishmentTime(new Calendar.Builder()
-													.setDate(1976, 1, 1).build().getTime().getTime())
-											.setOpeningTime(
-													new Calendar.Builder().setDate(2009, 5, 15).build().getTime()),
-									new Shop("Carrefour", "carrefour@gmail.com").setActive(true).setDuration(12)
-											.setAddress(new Address("FR", "Boulogne", "Golden", "18"))
-											.setBrandEstablishmentTime(new Calendar.Builder()
-													.setDate(1959, 1, 1).build().getTime().getTime())
-											.setOpeningTime(
-													new Calendar.Builder().setDate(2011, 6, 25).build().getTime()),
-									new Shop("Auchan", "shop@auchan.com").setActive(true).setDuration(11)
-											.setAddress(new Address("FR", "London", "Oushang", "93"))
-											.setBrandEstablishmentTime(new Calendar.Builder().setDate(1961, 1, 1)
-													.build().getTime().getTime())
-											.setOpeningTime(
-													new Calendar.Builder().setDate(2010, 3, 15).build().getTime())));
+			Shop first = new Shop("Walmart", "shop@walmart.com");
+			first.setActive(true);
+			first.setDuration(9);
+			first.setIntroduce("I am the 300th shop of Walmart.");
+			first.setAddress(new Address("USA", "NY", "Queen", "351"));
+			first.setBrandEstablishmentTime(new Calendar.Builder().setDate(1962, 1, 1).build().getTime().getTime());
+			first.setOpeningTime(new Calendar.Builder().setDate(2010, 10, 1).build().getTime());
+			Shop second = new Shop("Costco", "costco@gmail.com");
+			second.setActive(false);
+			second.setDuration(9);
+			second.setIntroduce("I am the 20th shop of Costco.");
+			second.setAddress(new Address("USA", "WA", "Issaquah", "908"));
+			second.setBrandEstablishmentTime(new Calendar.Builder().setDate(1976, 1, 1).build().getTime().getTime());
+			second.setOpeningTime(new Calendar.Builder().setDate(2009, 5, 15).build().getTime());
+
+			Shop third = new Shop("Carrefour", "carrefour@gmail.com");
+			third.setActive(true);
+			third.setDuration(12);
+			third.setAddress(new Address("FR", "Boulogne", "Golden", "18"));
+			third.setBrandEstablishmentTime(new Calendar.Builder().setDate(1959, 1, 1).build().getTime().getTime());
+			third.setOpeningTime(new Calendar.Builder().setDate(2011, 6, 25).build().getTime());
+			Shop fourth = new Shop("Auchan", "shop@auchan.com");
+			fourth.setActive(true);
+			fourth.setDuration(11);
+			fourth.setAddress(new Address("FR", "London", "Oushang", "93"));
+			fourth.setBrandEstablishmentTime(new Calendar.Builder().setDate(1961, 1, 1).build().getTime().getTime());
+			fourth.setOpeningTime(new Calendar.Builder().setDate(2010, 3, 15).build().getTime());
+
+			this.shopRepository.saveAll(Arrays.asList(first, second, third, fourth));
 
 		}
 		catch (Exception e) {

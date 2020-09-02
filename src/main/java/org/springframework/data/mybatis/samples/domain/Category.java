@@ -20,7 +20,6 @@ import javax.persistence.Table;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.experimental.Accessors;
 
 import org.springframework.data.mybatis.domain.Audit;
 
@@ -33,7 +32,6 @@ import org.springframework.data.mybatis.domain.Audit;
 @Entity
 @Table(name = "t_category")
 @Data
-@Accessors(chain = true)
 @NoArgsConstructor
 public class Category extends Audit<Long, Long> {
 

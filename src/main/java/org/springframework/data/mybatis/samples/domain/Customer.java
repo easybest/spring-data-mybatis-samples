@@ -47,7 +47,6 @@ import lombok.experimental.Accessors;
 @Table(name = "t_customer")
 @Data
 @NoArgsConstructor
-@Accessors(chain = true)
 public class Customer implements Serializable {
 
 	@EmbeddedId
