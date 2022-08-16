@@ -14,5 +14,5 @@ jobs:
                 with:
                     java-version: '${{ matrix.java }}'
                     distribution: 'adopt'
-            -   name: Build with Gradle
+            -   name: Build with Maven
                 run: ./mvnw clean package -U
