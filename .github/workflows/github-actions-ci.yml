@@ -22,5 +22,11 @@ jobs:
         with:
           java-version: '${{ matrix.java }}'
           distribution: 'adopt'
+      - name: Cache Maven Dependencies
+        uses: actions/cache@v3
+        with:
+          path: ~/.m2
+          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+          restore-keys: ${{ runner.os }}-m2-
       - name: Build with Maven
         run: ./mvnw clean package -U
