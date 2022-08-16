@@ -22,8 +22,11 @@
 </p>
 
 
-This is a demo project based on [Spring Data NyBatis](https://github.com/easybest/spring-data-mybatis).
+This is a demo project based on [Spring Data MyBatis](https://github.com/easybest/spring-data-mybatis).
 According to this demo project, you can quickly learn the basic usage of Spring Data MyBatis.
 
 ## How to Start
 
+```shell
+./mvnw spring-boot:run
+```
