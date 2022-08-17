@@ -1,6 +1,4 @@
-package com.example.demo.dto;
-
-import java.util.Set;
+package com.example.demo.command;
 
 import com.example.demo.domain.Address;
 import lombok.Data;
@@ -11,9 +9,8 @@ import lombok.Data;
  * @author Jarvis Song
  */
 @Data
-public class UserDTO {
+public class UserCreateCommand {
 
-    private Long id;
 
     private String emailAddress;
 
@@ -27,7 +24,6 @@ public class UserDTO {
 
     private Address address;
 
-    private UserDTO manager;
+    private Long managerId;
 
-    private Set<RoleDTO> roles;
 }
